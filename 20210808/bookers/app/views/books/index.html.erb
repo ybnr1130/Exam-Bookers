@@ -1,0 +1,28 @@
+<h3>Books</h3>
+
+
+<h4>New book</h4>
+<!--ここからエラー構文が入る-->
+<% if @book.errors.any? %>
+    <%= @book.errors.count %>件のエラーが発生しました
+    <% @book.errors.full_message.each do |message| %>
+    <%= message %>
+    <% end %>
+<% end %>
+
+<% if @book.errors.any? %>
+    <%= @book.errors.count %>件のエラーが発生しました。
+    <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+    <% end %>
+<% end %>
+
+<!--ここまでエラー構文が入る-->
+
+<%= form_with model:@book, local: true do |f| %>
+<p>Title</p>
+<%= f.text_field :title %>
+<p>Body</p>
+<%= f.text_area :body %>
+<%= f.submit 'Create book' %>
+<% end %>
