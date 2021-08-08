@@ -1,4 +1,15 @@
 <h4>Editing Book</h4>
+<!--ここからエラー文-->
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this book from being saved:
+    <ul>
+    <% @book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>        
+    </ul>
+<% end %>
+<!--ここまでエラー文-->
+
 
 <%= form_with model:@book, url: "/books/#{@book.id}", local:true do |f| %>
 <p>Title</p>
@@ -7,5 +18,5 @@
 <%= f.text_area :body %>
 <%= f.submit 'Upadete book' %>
 <% end %>
-<%= link_to 'Show', books_id_path(@book.id) %>
-<%= link_to 'Back', books_index %>
+<%= link_to 'Show', book_path(@book.id) %>
+<%= link_to 'Back', books_path %>

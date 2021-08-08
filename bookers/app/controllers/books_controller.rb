@@ -4,7 +4,7 @@ class BooksController < ApplicationController
 
 
   def index
-    # @books = Book.all
+    @books = Book.all
     @book = Book.new
   end
 
@@ -19,7 +19,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to books_id_path(@book.id)
+      redirect_to book_path(book.id)
     else
       render :index
     end
@@ -31,13 +31,17 @@ class BooksController < ApplicationController
   
   def update
     @book = Book.find(params[:id])
-    book.update
-    redirect_to books_id_path
+    if @book.update(book_params)
+      redirect_to book_path(@book)
+    else
+      render :edit
+    end
   end
+  
   def destroy
     book = Book.find(params[:id])
     book.destroy
-    redirect_to books_index_path
+    redirect_to books_path
   end
   
   

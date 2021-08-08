@@ -1,21 +1,46 @@
 <h3>Books</h3>
+<!--ここからエラー文-->
+<% if @book.errors.any? %>
+    <ul>
+    <% @book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>        
+    </ul>
+<% end %>
+<!--ここまでエラー文-->
 
+<!--ここからタイトル一覧-->
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Body</th>
+            <th></th>            
+        </tr>
+    </thead>
+    <tbody>
+        <% @books.each do |book| %>
+        <tr>
+            <td><%= book.title %></td>
+            <td><%= book.body %></td>
+            <td>
+                <%= link_to "Show", book_path(book.id) %>
+                <%= link_to "Edit", edit_book_path(book.id) %>
+                <%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>  
+<!--ここまでタイトル一覧-->
 
 <h4>New book</h4>
-<!--ここからエラー構文が入る-->
-<% if @book.errors.any? %>
-    <%= @book.errors.count %>件のエラーが発生しました
-    <% @book.errors.full_messages.each do |message| %>
-    <%= message %>
-    <% end %>
-<% end %>
-
-<!--ここまでエラー構文が入る-->
-
-<%= form_with model:@book, local: true do |f| %>
+<!--ここから入力フォーム-->
+<%= form_with model:@book, url: "/books", local: true do |f| %>
 <p>Title</p>
 <%= f.text_field :title %>
 <p>Body</p>
 <%= f.text_area :body %>
 <%= f.submit 'Create book' %>
 <% end %>
+<!--ここまで入力フォーム-->
