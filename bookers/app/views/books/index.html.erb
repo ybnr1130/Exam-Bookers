@@ -2,15 +2,7 @@
 
 <h3>Books</h3>
 
-<!--ここからエラー文-->
-<% if @book.errors.any? %>
-    <ul>
-    <% @book.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>        
-    </ul>
-<% end %>
-<!--ここまでエラー文-->
+
 
 <!--ここからタイトル一覧-->
 <table>
@@ -38,6 +30,18 @@
 <!--ここまでタイトル一覧-->
 
 <h4>New book</h4>
+
+<!--ここからエラー文-->
+<% if @book.errors.any? %>
+    <%= @book.errors.count %> errors prohibited this book from being saved:
+    <ul>
+    <% @book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>        
+    </ul>
+<% end %>
+<!--ここまでエラー文-->
+
 <!--ここから入力フォーム-->
 <%= form_with model:@book, url: "/books", local: true do |f| %>
 <p>Title</p>
