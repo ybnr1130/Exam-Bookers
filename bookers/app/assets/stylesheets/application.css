@@ -29,9 +29,9 @@ body {
   margin: 33px;
 }
 
-p {
+p, td, ol, ul {
   margin: 33px;
-  line-height: 18;
+  line-height: 18px;
   font-size: 13px;
   font-family: verdana, arial, helvetica, sans-serif;
 }
